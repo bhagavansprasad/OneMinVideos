@@ -1,0 +1,34 @@
+@startuml
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+participant "🧑‍💻" as User
+participant "🤖  " as LLM
+participant "🐍{...} " as PFUN
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 10
+    Padding 10
+}
+
+participant "Functions{...}" as FUN
+
+User -> LLM: Send query
+activate LLM
+LLM -> LLM: Process input
+LLM -> LLM: Generate response
+LLM --> User: Return answer
+deactivate LLM
+
+@enduml
+

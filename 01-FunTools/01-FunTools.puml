@@ -1,0 +1,357 @@
+@startuml
+skinparam backgroundColor transparent
+skinparam handwritten true
+skinparam titleFontSize 16
+skinparam titleFontColor #37559A
+' title "Deterministic Function Calls"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+participant "🧑‍💻" as User 
+participant "🐍{...} " as PFUN
+
+User -> PFUN: <color:#37559A> Query: 10 + 20 ?
+User <- PFUN: <color:#90C849> 30
+
+...
+
+User -> PFUN: <color:#37559A> Query: a + b ?
+User -> PFUN: <color:#90C849> 30
+@enduml
+
+' =======================================================
+
+@startuml
+
+skinparam backgroundColor transparent
+skinparam handwritten true
+skinparam titleFontSize 16
+skinparam titleFontColor #37559A
+' title "Natural Language Processing Challenges"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+participant "🧑‍💻" as User 
+participant "🐍{...} " as PFUN
+
+User -> PFUN: <color:#37559A> Query: Ten + 20 ?
+User <- PFUN: <color:#90C849> ???
+
+...
+
+User -> PFUN: <color:#37559A> Query: Add 10 and 20 ?
+User -> PFUN: <color:#90C849> ???
+
+...
+
+User -> PFUN: <color:#37559A> Query: Sum of Ten and Twenty ?
+User -> PFUN: <color:#90C849> ???
+@enduml
+
+' =======================================================
+
+@startuml
+skinparam backgroundColor transparent
+skinparam handwritten true
+skinparam titleFontSize 10
+skinparam titleFontColor #37559A
+' title "LLM-Enhanced Natural Language Processing"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+participant "🧑‍💻" as User
+participant "🤖  " as LLM
+
+User -> LLM: <color:#37559A> Query: Ten + 20 ?
+LLM -> LLM: Parse & Interpret
+LLM -> User: <color:#90C849> 30
+
+...
+
+User -> LLM: <color:#37559A> Query: Add 10 and 20 ?
+LLM -> LLM: Natural Language \n Understanding
+LLM -> User: <color:#90C849> 30
+@enduml
+
+' =======================================================
+
+@startuml
+skinparam backgroundColor transparent
+skinparam handwritten true
+skinparam titleFontSize 10
+skinparam titleFontColor #37559A
+' title "LLM Limitations: No Latest Data"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+participant "🧑‍💻" as User
+participant "🤖  " as LLM
+
+User -> LLM: <color:#37559A> What is the temperature\nin Bengaluru?
+LLM -> LLM: Analyze Query:\n- Location: Bengaluru\n- Need: Current Weather
+LLM -> LLM: <color:#FF0000> ❌ Knowledge Cutoff:\nNo real-time data available
+LLM -> User: <color:#90C849> No Infomation available
+@enduml
+
+' =======================================================
+
+@startuml
+skinparam backgroundColor transparent
+skinparam handwritten true
+skinparam titleFontSize 10
+skinparam titleFontColor #37559A
+' title "User with Tools (functions)"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+box "User Context" #eef5d470
+    participant "🧑‍💻" as User
+    participant "🛠️  " as Tools
+end box
+
+participant "🤖  " as LLM
+
+...
+
+...
+
+...
+
+@enduml
+
+' =======================================================
+
+@startuml
+skinparam backgroundColor transparent
+skinparam handwritten true
+skinparam titleFontSize 10
+skinparam titleFontColor #37559A
+' title "LLM Limitations: Function Tools Required"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+box "User Context" #eef5d470
+    participant "🧑‍💻" as User
+    participant "🛠️  " as Tools
+end box
+participant "🤖  " as LLM
+
+User <- Tools: <color:#9B59B6>Get_Tools:\nget_weather(location)
+User -> LLM: <color:#9B59B6> Available Tools:\nget_weather(location)
+@enduml
+
+' =======================================================
+
+' =======================================================
+
+@startuml
+skinparam backgroundColor transparent
+skinparam handwritten true
+skinparam titleFontSize 10
+skinparam titleFontColor #37559A
+' title "LLM Limitations: Function Tools Required"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+box "User Context" #eef5d470
+    participant "🧑‍💻" as User
+    participant "🛠️  " as Tools
+end box
+participant "🤖  " as LLM
+
+User <- Tools: <color:#9B59B6>Get_Tools:\nget_weather(location)
+User -> LLM: <color:#9B59B6> Available Tools:\nget_weather(location)
+User -> LLM: <color:#37559A> What is the temperature\nin Bengaluru?
+LLM -> LLM: Analyze Query:\n- Location: Bengaluru\n- Need: Current Weather
+LLM -> LLM: <color:#FF0000> ❌ Knowledge Cutoff:\nNo real-time data available
+LLM -> User: <color:#9B59B6> Please invoke:\nget_weather("Bengaluru")
+User -> Tools: Execute:\nget_weather("Bengaluru")
+Tools -> Tools: Invoke external APIs:\nWeather service call
+Tools -> User: <color:#90C849> Tool Result:\nTemperature: 28°C
+User -> LLM: <color:#90C849> Tool output:\nTemperature: 28°C
+LLM -> LLM: Format Response:\nCombine data with context
+LLM -> User: <color:#90C849> The current temperature\nin Bengaluru is 28°C
+@enduml
+
+' =======================================================
+
+@startuml
+skinparam backgroundColor transparent
+skinparam handwritten true
+skinparam titleFontSize 16
+skinparam titleFontColor #37559A
+' title "LLM Limitations: Multiple Function Tools Required"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+box "User Context" #eef5d470
+    participant "🧑‍💻" as User
+    participant "🛠️  " as Tools
+end box
+participant "🤖  " as LLM
+
+User <- Tools: <color:#9B59B6>Get_Tools:\nget_emp_list()\nget_perf_ratings()
+User -> LLM: <color:#9B59B6> Available Tools
+User -> LLM: <color:#37559A> PromptlyAI intends to distribute\n50% of its annual profit as bonuses\nto employees, weighted by their\nperformance ratings
+LLM -> LLM: Analyze Query:\n- Need: Employee data\n- Need: Performance ratings\n- Task: Calculate weighted bonuses
+LLM -> LLM: <color:#FF0000> ❌ Knowledge Cutoff:\nNo access to company data
+LLM -> User: <color:#9B59B6> Please invoke:\nget_emp_list()
+User -> Tools: Execute:\nget_emp_list()
+Tools -> Tools: Invoke API
+Tools -> User: <color:#90C849> Tool Result: {...employees list...}
+User -> LLM: <color:#90C849> Employee list
+LLM -> User: <color:#9B59B6> Please invoke:\nget_perf_ratings()
+User -> Tools: Execute:\nget_perf_ratings()
+Tools -> Tools: Invoke API
+Tools -> User: <color:#90C849> Tool Result:{...Performance ratings...}
+User -> LLM: <color:#90C849> Performance ratings
+LLM -> LLM: Calculate weighted bonuses:\n- Total rating points\n- Individual weightings\n- 50% profit distribution
+LLM -> User: <color:#90C849> Based on the data, here's\nthe bonus calculation:\nVachan: ₹ 1,50,000 (4.5 rating)\nSaketh: ₹ 1,12,667 (3.8 rating)
+@enduml
+
+' =======================================================
+
+@startuml
+skinparam backgroundColor transparent
+skinparam handwritten true
+skinparam titleFontSize 16
+skinparam titleFontColor #37559A
+' title "LLM Limitations: Multiple Function Tools Required"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+box "User Context" #eef5d470
+    participant "🧑‍💻" as User
+    participant "🛠️  " as Tools
+end box
+participant "🤖  " as LLM
+
+autonumber 
+User <- Tools: <color:#9B59B6>Get_Tools:\nget_emp_list()\nget_perf_ratings()
+User -> LLM: <color:#9B59B6> Available Tools
+User -> LLM: <color:#37559A> PromptlyAI intends to distribute\n50% of its annual profit as bonuses\nto employees, weighted by their\nperformance ratings
+LLM -> LLM: Analyze Query:\n- Need: Employee data\n- Need: Performance ratings\n- Task: Calculate weighted bonuses
+LLM -> LLM: <color:#FF0000> ❌ Knowledge Cutoff:\nNo access to company data
+LLM -> User: <color:#9B59B6> Please invoke:\nget_emp_list()
+User -> Tools: Execute:\nget_emp_list()
+Tools -> Tools: Invoke API
+Tools -> User: <color:#90C849> Tool Result: {...employees list...}
+User -> LLM: <color:#90C849> Employee list
+@enduml
+
+' =======================================================
+
+@startuml
+skinparam backgroundColor transparent
+skinparam handwritten true
+skinparam titleFontSize 16
+skinparam titleFontColor #37559A
+' title "LLM Limitations: Multiple Function Tools Required"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+box "User Context" #eef5d470
+    participant "🧑‍💻" as User
+    participant "🛠️  " as Tools
+end box
+participant "🤖  " as LLM
+
+autonumber 11
+LLM -> User: <color:#9B59B6> Please invoke:\nget_perf_ratings()
+User -> Tools: Execute:\nget_perf_ratings()
+Tools -> Tools: Invoke API
+Tools -> User: <color:#90C849> Tool Result:{...Performance ratings...}
+User -> LLM: <color:#90C849> Performance ratings
+LLM -> LLM: Calculate weighted bonuses:\n- Total rating points\n- Individual weightings\n- 50% profit distribution
+LLM -> User: <color:#90C849> Based on the data, here's\nthe bonus calculation:\nVachan: ₹ 1,50,000 (4.5 rating)\nSaketh: ₹ 1,12,667 (3.8 rating)
+@enduml

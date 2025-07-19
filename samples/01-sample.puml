@@ -1,0 +1,94 @@
+@startuml
+skinparam handsketched true
+
+actor User
+actor "🧠 LLM" as LLM
+
+User -> LLM: Send query
+LLM --> User: Return answer
+
+@enduml
+
+@startuml
+skinparam handwritten true
+
+actor User
+participant "🧠" as LLM
+ParticipantBorderColor White
+
+User -> LLM: Send query
+activate LLM
+LLM -> LLM: Process input
+LLM -> LLM: Generate response
+LLM --> User: Return answer
+deactivate LLM
+
+@enduml
+
+@startuml
+skinparam handwritten true
+
+' Set global participant styles
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+}
+
+actor User
+participant "🧠" as LLM
+
+User -> LLM: Send query
+activate LLM
+LLM -> LLM: Process input
+LLM -> LLM: Generate response
+LLM --> User: Return answer
+deactivate LLM
+
+@enduml
+
+@startuml
+skinparam handwritten true
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+participant "🧑‍💻🧑‍⚖️" as User
+participant "🤖" as LLM
+
+User -> LLM: Send query
+activate LLM
+LLM -> LLM: Process input
+LLM -> LLM: Generate response
+LLM --> User: Return answer
+deactivate LLM
+
+@enduml
+
+
+@startuml
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+participant "🧑‍💻🧑‍⚖️" as User
+participant "🤖" as LLM
+
+User -> LLM: Send query
+activate LLM
+LLM -> LLM: Process input
+LLM -> LLM: Generate response
+LLM --> User: Return answer
+deactivate LLM
+
+@enduml

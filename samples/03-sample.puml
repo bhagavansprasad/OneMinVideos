@@ -1,0 +1,41 @@
+@startuml
+
+skinparam handwritten true
+skinparam titleFontSize 10
+skinparam titleFontColor #37559A
+title "LLM Limitations: Function Tools Required"
+
+skinparam handwritten true
+
+hide footbox
+
+skinparam Participant {
+    BackgroundColor transparent
+    BorderColor white
+    FontSize 36
+    Padding 30
+}
+
+participant "🧑‍💻" as User
+participant "🛠️" as Tools
+participant "🤖  " as LLM
+participant "🌐  " as WeatherAPI
+
+User -> Tools: <color:#9B59B6> Register:\nget_weather(location)
+Tools -> LLM: <color:#9B59B6> Available Tools:\nget_weather(location)
+
+...
+
+User -> LLM: <color:#37559A> What is the temperature\nin Bengaluru?
+LLM -> LLM: Analyze Query:\n- Location: Bengaluru\n- Need: Current Weather
+LLM -> LLM: <color:#FF0000> ❌ Knowledge Cutoff:\nNo real-time data available
+LLM -> User: <color:#9B59B6> Please invoke:\nget_weather("Bengaluru")
+User -> Tools: Execute:\nget_weather("Bengaluru")
+Tools -> WeatherAPI: HTTP Request:\nGET /weather?city=Bengaluru
+WeatherAPI -> Tools: <color:#90C849> API Response:\n{"temp": 28, "humidity": 65%}
+Tools -> User: <color:#90C849> Tool Result:\nTemperature: 28°C
+User -> LLM: <color:#90C849> Tool output:\nTemperature: 28°C
+LLM -> LLM: Format Response:\nCombine data with context
+LLM -> User: <color:#90C849> The current temperature\nin Bengaluru is 28°C
+
+@enduml
